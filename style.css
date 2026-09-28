@@ -381,7 +381,7 @@ COUNTDOWN SECTION
 
 .countdown-section {
   background: #fbf7f2;
-  padding: 30px 20px;
+  padding: 10px 20px;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
@@ -431,7 +431,7 @@ COUNTDOWN SECTION
 }
 
 .countdown div {
-  width: 120px;
+  width: 100px;
   padding: 25px;
   border-radius: 15px;
   background: white;
@@ -1166,11 +1166,12 @@ RESPONSIVE
   }
 
   .countdown {
-    gap: 12px;
+    gap: 5px;
+    
   }
 
   .countdown div {
-    width: 72px;
+    width: 62px;
     padding: 14px 5px;
     border-radius: 12px;
     opacity: 0;
