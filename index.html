@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Aditi & Pankaj · Wedding Invitation</title>
+  <meta name="description" content="An elegant wedding invitation for Aditi & Pankaj — 03-february 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main id="app">
+
+
+    <!-- share button -->
+    <button id="share-btn" type="button" class="share-btn" aria-label="Share invitation as image">
+      <span class="share-idle"><i class="bi bi-share-fill"></i> Share</span>
+      <span class="share-loading d-none"><span class="spinner-border spinner-border-sm"></span> Preparing…</span>
+    </button>
+
+    <!-- Music Disc -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="assests/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="musicPlayer">
+      <div class="vinyl">
+        <div class="vinyl-center">
+          ♪
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRO / VIDEO -->
+    <div id="video-screen" class="video-screen" role="button" aria-label="Tap to open invitation">
+      <video id="envelope-video" class="envelope-video" playsinline preload="auto" poster="assests/envelope-poster.jpg">
+        <source src="assests/envelope.mp4" type="video/mp4" />
+      </video>
+      <img id="envelope-poster" src="assests/envelope-poster.jpg" alt="" aria-hidden="true" class="envelope-poster" />
+      <div class="tap-hint" id="tap-hint">
+        <p class="shimmer">Tap Seal to Open</p>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero" class="hero-section d-none">
+      <div id="rose-petals" class="rose-petals" aria-hidden="true"></div>
+      <div class="hero-image"></div>
+      <div class="hero-white-bed"></div>
+      <div class="hero-text text-center">
+        <p class="fade-up eyebrow" style="--d:1.25s">Our Wedding Invitation</p>
+        <div class="fade-up " style="--d:1.45s">
+          <h1 class="fade-up couple-names" style="--d:1.65s">Aditi &amp; Pankaj </h1>
+          <div class="divider">
+            <span></span>
+            ✦
+            <span></span>
+          </div>
+        </div>
+        <button id="invitation-btn" class="button-in invitation-btn" style="--d:2.05s">
+          <span class="btn-border-outer"></span>
+          <span class="btn-border-inner"></span>
+          <span class="btn-label">Our Invitation</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCRATCH CARDS -->
+    <section class="scratch-section" id="scratch-section">
+
+      <div class="container">
+
+        <h6 class="scratch-title-small">
+          REVEAL OUR BIG DAY
+        </h6>
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h1 class="scratch-title">
+          Scratch each card
+        </h1>
+
+        <div class="scratch-wrapper">
+
+          <!-- Day -->
+          <div class="scratch-card">
+
+            <div class="heart">
+
+              <div class="heart-value">
+                03
+              </div>
+
+              <canvas class="scratchCanvas" data-label="DAY">
+              </canvas>
+
+              <svg class="heart-border" viewBox="0 0 100 100">
+
+                <path d="M50 88 C20 68 4 48 4 30
+                        C4 14 16 4 30 4
+                        C40 4 46 10 50 18
+                        C54 10 60 4 70 4
+                        C84 4 96 14 96 30
+                        C96 48 80 68 50 88 Z" />
+              </svg>
+
+            </div>
+
+            <p>DAY</p>
+
+          </div>
+
+          <!-- Month -->
+          <div class="scratch-card">
+
+            <div class="heart">
+
+              <div class="heart-value">
+                Feb
+              </div>
+
+              <canvas class="scratchCanvas" data-label="MONTH">
+              </canvas>
+
+              <svg class="heart-border" viewBox="0 0 100 100">
+
+                <path d="M50 88 C20 68 4 48 4 30
+                        C4 14 16 4 30 4
+                        C40 4 46 10 50 18
+                        C54 10 60 4 70 4
+                        C84 4 96 14 96 30
+                        C96 48 80 68 50 88 Z" />
+              </svg>
+
+            </div>
+
+            <p>MONTH</p>
+
+          </div>
+
+          <!-- Year -->
+          <div class="scratch-card">
+
+            <div class="heart">
+
+              <div class="heart-value">
+                2027
+              </div>
+
+              <canvas class="scratchCanvas" data-label="YEAR">
+              </canvas>
+
+              <svg class="heart-border" viewBox="0 0 100 100">
+
+                <path d="M50 88 C20 68 4 48 4 30
+                        C4 14 16 4 30 4
+                        C40 4 46 10 50 18
+                        C54 10 60 4 70 4
+                        C84 4 96 14 96 30
+                        C96 48 80 68 50 88 Z" />
+              </svg>
+
+            </div>
+
+            <p>YEAR</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- COUNTDOWN -->
+      <section class="countdown-section" id="countdownSection">
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <div class="container">
+
+          <h1 class="date-text" id="togo">
+            Countdown To Our Forever
+          </h1>
+          <h2>
+            Wedding Date
+          </h2>
+
+          <h1 class="date-text">
+            03-February-2027
+          </h1>
+
+          <div class="countdown">
+
+            <div class="text-center">
+              <span id="days">00</span>
+              <small>Days</small>
+            </div>
+
+            <div class="text-center">
+              <span id="hours">00</span>
+              <small>Hours</small>
+            </div>
+
+            <div class="text-center">
+              <span id="minutes">00</span>
+              <small>Minutes</small>
+            </div>
+
+            <div class="text-center">
+              <span id="seconds">00</span>
+              <small>Seconds</small>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="divider mt-4">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+      </section>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section class="gallery-section">
+
+      <div class="container">
+
+        <h6 class="gallery-small">
+          OUR MEMORIES
+        </h6>
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h1 class="gallery-title">
+          Moments of Us
+        </h1>
+
+        <div class="gallery-slider">
+
+          <div class="gallery-track">
+
+            <div class="gallery-card">
+              <img src="assests/photo 1.jpg" alt="">
+              <h6 class="image-small">
+                OUR HAPPY MOMENT
+              </h6>
+
+
+            </div>
+
+            <div class="gallery-card">
+              <img src="assests/photo 2.jpg" alt="">
+              <h6 class="image-small">
+                OUR FOREVER PROMISE
+              </h6>
+            </div>
+
+            <div class="gallery-card">
+              <img src="assests/photo 3.jpg" alt="">
+              <h6 class="image-small">
+                OUR CHERISHING MOMENT
+              </h6>
+            </div>
+
+            <div class="gallery-card">
+              <img src="assests/photo 4.jpg" alt="">
+              <h6 class="image-small">
+                OUR TEASING MOMENT
+              </h6>
+            </div>
+
+            <div class="gallery-card">
+              <img src="assests/photo 5.jpg" alt="">
+              <h6 class="image-small">
+                HOLDING HANDS FOREVER
+              </h6>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- WEDDING FUNCTIONS -->
+    <section class="functions-section">
+
+      <div class="container">
+
+        <h6 class="functions-small">
+          OUR CELEBRATIONS
+        </h6>
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h1 class="functions-title">
+          Here Comes Our Wedding Festivities
+        </h1>
+
+        <div class="divider mb-4">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <!-- Haldi -->
+        <div class="function-card">
+
+          <h2>Haldi Hues</h2>
+
+          <p class="function-quote ">
+            Let the celebrations begin with laughter,
+            happiness and unforgettable memories.
+          </p>
+
+          <div class="function-info">
+            <span> 02-February-2027</span>
+            <span> 02:00 pm </span>
+          </div>
+          <div class="image-border">
+            <img src="assests/carnival.jpg" alt="Carnival">
+          </div>
+        </div>
+
+        <div class="divider mb-4">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <!-- Sangeet -->
+        <div class="function-card">
+
+          <h2>Sangeet</h2>
+
+          <p class="function-quote">
+            An evening filled with music,
+            dance and endless celebrations.
+          </p>
+
+          <div class="function-info">
+            <span>02-February-2027</span>
+            <span>07:30 pm</span>
+          </div>
+
+          <div class="image-border">
+            <img src="assests/Sangeet.jpg" alt="sangeet">
+          </div>
+
+        </div>
+
+        <div class="divider mb-4">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <!-- Baraat -->
+        <div class="function-card">
+
+          <h2>Baraat</h2>
+
+          <p class="function-quote">
+            A royal procession celebrating
+            the arrival of our groom.
+          </p>
+
+          <div class="function-info">
+            <span>03-February-2027</span>
+            <span> 04:00 pm</span>
+          </div>
+
+          <div class="image-border">
+            <img src="assests/baraat.jpg" alt="baraat">
+          </div>
+
+        </div>
+
+        <div class="divider mb-4">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <!-- Wedding -->
+        <div class="function-card">
+
+          <h2>Wedding</h2>
+
+          <p class="function-quote">
+            Two hearts exchange garlands
+            and promise a lifetime together.
+          </p>
+
+          <div class="function-info">
+            <span> 03-February-2027</span>
+            <span> 06:30 pm</span>
+          </div>
+
+          <div class="image-border">
+            <img src="assests/wedding.jpg" alt="wedding">
+          </div>
+
+        </div>
+
+        <div class="divider mb-4">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <!-- Reception -->
+        <div class="function-card">
+
+          <h2>Reception</h2>
+
+          <p class="function-quote">
+            Surrounded by love and blessings,
+            we begin our forever.
+          </p>
+
+          <div class="function-info">
+            <span>03-February-2027</span>
+            <span> 07:30 pm</span>
+          </div>
+
+          <div class="image-border">
+            <img src="assests/reception.jpg" alt="reception">
+          </div>
+
+        </div>
+
+        <div class="divider mb-4">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- INVITATION -->
+    <section class="invitation-section">
+
+      <div class="container">
+
+        <h6 class="invite-small">
+          WITH THE BLESSINGS OF
+        </h6>
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h1 class="invite-title">
+          We Request the Honour of Your Presence
+        </h1>
+
+        <p class="invite-message">
+          Together with our beloved families,
+          we joyfully invite you to celebrate the beginning
+          of our forever. Your love, blessings and presence
+          will make our wedding day truly unforgettable.
+        </p>
+
+        <div class="family-wrapper">
+
+          <div class="family-card">
+
+            <h2>Bride</h2>
+
+            <h3>Aditi Vedmutha</h3>
+
+            <p>
+              Grand-Daughter of
+            </p>
+            <h4>Smt.Omni Devi Sha.Harishmal Ji Vedmutha</h4>
+
+            <p class="mt-3">
+              Daughter of
+            </p>
+            <h4>Smt Sunita Rajesh kumar Vedmutha</h4>
+
+
+          </div>
+
+          
+
+          <div class="family-card">
+
+            <h2>Groom</h2>
+
+            <h3>Pankaj Dhani</h3>
+
+            <p>
+              Grand-Son of
+            </p>
+            <h4>Smt.Sumi Devi Sha.Heeralal Ji Dhani</h4>
+
+            <p class="mt-3">
+              Son of
+            </p>
+            <h4>Smt Sangeeta Ramesh kumarji Dhani</h4>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- VENUE -->
+    <section class="venue-section">
+
+      <div class="container text-center">
+
+        <h6 class="venue-small">
+          WEDDING VENUE
+        </h6>
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h1 class="venue-title">
+          Join Us Here
+        </h1>
+
+        <h2 class="venue-name">
+          The Grand Palace
+        </h2>
+
+        <p class="venue-address">
+          Road No. 45, Jubilee Hills<br>
+          Hyderabad, Telangana
+        </p>
+
+        <div class="venue-map">
+
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.630849665002!2d78.40057447493572!3d17.42949458346492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb914a394ababb%3A0xa8965ddd0d2b0eba!2sRoad%20No.%2045%20Jubilee%20Hills%2C%20Jubilee%20Hills%2C%20Hyderabad%2C%20Telangana%20500033!5e0!3m2!1sen!2sin!4v1785580848181!5m2!1sen!2sin"
+            allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+
+        </div>
+        <div class="venue-details">
+
+          <div class="venue-info">
+            🚗 Parking Available
+          </div>
+
+          <div class="venue-info">
+            📍 Easy Navigation via Google Maps
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="rsvp-section">
+
+      <div class="container text-center">
+
+        <h6 class="venue-small">
+          RSVP
+        </h6>
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h1 class="venue-title">
+          We'd Love To Celebrate With You
+        </h1>
+
+        <p class="rsvp-text">
+
+          Kindly let us know your presence.
+          Your response will help us make
+          the celebration even more special.
+
+        </p>
+
+        <a href="https://wa.me/919177870355" class="venue-btn" target="_blank">
+
+          RSVP on WhatsApp
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- THANK YOU -->
+    <section class="thankyou-section">
+
+      <div class="container text-center">
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h1 class="thank-title">
+
+          Thank You
+
+        </h1>
+
+        <p class="thank-text">
+
+          Thank you for being part of our journey.
+
+          Your love, blessings and presence
+          mean the world to us.
+
+          We can't wait to celebrate
+          this beautiful beginning together.
+
+        </p>
+
+        <div class="divider">
+          <span></span>
+          ✦
+          <span></span>
+        </div>
+
+        <h2 class="couple-sign">
+
+          Aditi & Pankaj
+
+        </h2>
+
+      </div>
+
+    </section>
+
+    <!-- Heart Clip Path (shared SVG clip-path used by the scratch cards) -->
+    <svg width="0" height="0">
+
+      <defs>
+
+        <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+
+          <path d="M50 88
+        C20 68 4 48 4 30
+        C4 14 16 4 30 4
+        C40 4 46 10 50 18
+        C54 10 60 4 70 4
+        C84 4 96 14 96 30
+        C96 48 80 68 50 88 Z" transform="scale(.01)" />
+
+        </clipPath>
+
+      </defs>
+
+    </svg>
+
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1484 @@
+/*==================================================
+ROOT VARIABLES
+==================================================*/
+
+:root {
+  --ivory: oklch(0.985 0.012 85);
+  --champagne: oklch(0.92 0.045 85);
+  --gold: oklch(0.82 0.13 85);
+  --gold-deep: oklch(0.68 0.14 70);
+  --deep-red: oklch(0.38 0.16 25);
+  --deep-red-dark: oklch(0.28 0.14 22);
+  --font-serif: "Cormorant Garamond", serif;
+  --font-script: "Great Vibes", cursive;
+  --shadow-gold: 0 10px 40px -10px color-mix(in oklab, var(--gold) 45%, transparent);
+  --shadow-red: 0 12px 40px -12px color-mix(in oklab, var(--deep-red) 40%, transparent);
+}
+
+
+/*==================================================
+GLOBAL STYLES
+==================================================*/
+
+/* Applied to <body> while the intro video overlay is showing, to lock background scroll */
+body.intro-lock {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
+
+}
+
+/* Stacking context: keeps page content above the fixed rose-petal layer (see ROSE PETALS) */
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+
+/*==================================================
+COMMON COMPONENTS
+==================================================*/
+
+/* Small "flourish" divider ( ── ✦ ── ) reused across every section.
+   NOTE: the original stylesheet declared `.divider` twice — once near the
+   Hero styles and again near the Scratch Cards styles — with the second
+   declaration overriding the first for `gap`/`justify-content` and adding
+   `color`. Both are merged below into the single rule the browser was
+   already resolving to; the computed style is unchanged. */
+.divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: .75rem;
+  color: #caa64d;
+}
+
+.divider span {
+  width: 60px;
+  height: 1px;
+  background: #d9c59d;
+}
+
+
+/*==================================================
+INTRO VIDEO
+==================================================*/
+
+.video-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.envelope-video,
+.envelope-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.envelope-poster {
+  pointer-events: none;
+}
+
+.tap-hint {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(2rem, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+}
+
+.tap-hint p {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: .7rem;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, .95);
+  text-shadow: 0 2px 8px oklch(0 0 0 / .7);
+}
+
+.shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+
+/*==================================================
+HERO SECTION
+==================================================*/
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ivory);
+  animation: fade-in-slow .6s ease-out both;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('assests/hero-2.jpg');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  transform-origin: center top;
+  animation: hero-zoom 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.hero-white-bed {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 43%;
+  background: linear-gradient(to bottom, oklch(1 0 0 / 0) 0%, var(--ivory) 25%, var(--ivory) 70%);
+}
+
+.hero-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1.5rem max(2rem, env(safe-area-inset-bottom));
+}
+
+.eyebrow {
+  margin: 0 0 .95rem;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: .75rem;
+  letter-spacing: .55em;
+  text-transform: uppercase;
+  color: var(--deep-red);
+}
+
+.couple-names {
+  margin: .25rem 0 0;
+  font-family: var(--font-script);
+  color: var(--deep-red);
+  font-size: 3.25rem;
+  line-height: 1.02;
+  font-weight: 400;
+
+}
+
+.invitation-btn {
+  position: relative;
+  margin-top: 1rem;
+  padding: .75rem 2rem;
+  border: 0;
+  overflow: hidden;
+  border-radius: 9999px;
+  color: var(--ivory);
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: .65rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, oklch(0.42 0.17 25), oklch(0.32 0.14 22));
+  box-shadow: var(--shadow-red), inset 0 1px 0 oklch(1 0 0 / .15);
+  transition: transform .3s ease, filter .3s ease;
+  cursor: pointer;
+}
+
+.invitation-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.invitation-btn:active {
+  transform: scale(.99);
+}
+
+.btn-border-outer,
+.btn-border-inner {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+}
+
+.btn-border-outer {
+  inset: 0;
+  border: 1px solid color-mix(in oklab, var(--gold) 60%, transparent);
+}
+
+.btn-border-inner {
+  inset: 3px;
+  border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
+}
+
+.btn-label {
+  position: relative;
+}
+
+/* Fade-up / button-in entrance animations (used on hero eyebrow, names, button) */
+.fade-up {
+  opacity: 0;
+  animation: fade-up .9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+.button-in {
+  opacity: 0;
+  animation: button-in .9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+
+/*==================================================
+SCRATCH SECTION
+==================================================*/
+
+.scratch-section {
+  padding: 30px 20px;
+  background: #fbf7f2;
+  overflow: hidden;
+}
+
+.scratch-title-small {
+  text-align: center;
+  letter-spacing: 8px;
+  font-size: 13px;
+  color: #6e2d31;
+  margin-bottom: 20px;
+}
+
+.scratch-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 58px;
+  text-align: center;
+  color: #6e2d31;
+  margin-top: 25px;
+  margin-bottom: 70px;
+  animation: floatName 4s ease-in-out infinite;
+}
+
+/* --- Heart cards wrapper/layout ---
+   NOTE: the original stylesheet declared `.scratch-wrapper`, `.scratch-card`,
+   `.heart` and `.heart-value` a second time *after* the Responsive media
+   query, with no media condition. Because that second declaration has the
+   same specificity and comes later in the cascade, it always won — on every
+   viewport — over both the first declaration AND the mobile media-query
+   override, which made the mobile-only sizing dead code. The rules below
+   are the single merged declaration that already matches what rendered. */
+.scratch-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.scratch-card {
+  text-align: center;
+  width: 30%;
+}
+
+.scratch-card p {
+  margin-top: 18px;
+  letter-spacing: 6px;
+  color: #6e2d31;
+  font-size: 12px;
+}
+
+.heart {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  animation: heartbeat 3s ease-in-out infinite;
+}
+
+.heart::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -120%;
+  width: 50%;
+  height: 180%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, .45),
+      transparent);
+  transform: rotate(25deg);
+  animation: shine 5s linear infinite;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Hidden value revealed underneath the scratch canvas */
+.heart-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  clip-path: url(#heartClip);
+  background: radial-gradient(circle at top, #fffdf9, #f5e8cf);
+  font-family: 'Great Vibes', cursive;
+  font-size: 34px;
+  color: #7d2126;
+}
+
+/* Scratch-off canvas layer */
+.scratchCanvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  clip-path: url(#heartClip);
+  cursor: pointer;
+  transition: .8s;
+}
+
+.scratchCanvas.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Heart outline drawn over the canvas/value */
+.heart-border {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.heart-border path {
+  fill: none;
+  stroke: #9a3437;
+  stroke-width: 2.5;
+}
+
+/* Pop feedback when a card finishes scratching */
+.completed {
+  animation: pop .5s;
+}
+
+
+/*==================================================
+COUNTDOWN SECTION
+==================================================*/
+
+.countdown-section {
+  background: #fbf7f2;
+  padding: 30px 20px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-40px);
+  transition:
+    max-height 1s ease,
+    opacity .8s ease,
+    transform .8s ease,
+    padding .8s ease;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.countdown-section.show {
+  max-height: 1200px;
+  /* enough height */
+  opacity: 1;
+  transform: translateY(0);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.countdown-section h2 {
+  text-align: center;
+  letter-spacing: 8px;
+  color: #6e2d31;
+  font-size: 44px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.date-text {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 65px;
+  color: #7d2126;
+  margin: 20px 0 60px;
+
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.countdown div {
+  width: 120px;
+  padding: 25px;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, .08);
+  opacity: 0;
+  transform: translateY(60px) scale(.9);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.countdown span {
+  display: block;
+  font-size: 42px;
+  color: #7d2126;
+  font-weight: bold;
+}
+
+.countdown small {
+  letter-spacing: 4px;
+  color: #777;
+}
+
+#togo {
+  margin-bottom: 5px;
+}
+
+
+/*==================================================
+PHOTO GALLERY
+==================================================*/
+
+.gallery-section {
+  padding: 0px 3px 15px;
+  background: #fbf7f2;
+  overflow: hidden;
+}
+
+.gallery-small {
+  text-align: center;
+  letter-spacing: 8px;
+  font-size: 13px;
+  color: #6e2d31;
+  margin-bottom: 20px;
+}
+
+.gallery-title {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 60px;
+  color: #6e2d31;
+  margin: 25px 0 60px;
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.gallery-slider {
+  overflow: hidden;
+  width: 100%;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 25px;
+  width: max-content;
+  animation: galleryMove 25s linear infinite;
+}
+
+.gallery-slider:hover .gallery-track {
+  animation-play-state: paused;
+}
+
+.gallery-card {
+  width: 270px;
+  flex-shrink: 0;
+  background: white;
+  padding: 12px 12px 35px;
+  border-radius: 12px;
+  /* box-shadow: 0 18px 40px rgba(0,0,0,.08); */
+  transition: .4s;
+}
+
+.gallery-card:hover {
+  transform: translateY(-8px) rotate(-2deg);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-small {
+  text-align: center;
+  color: #6e2d31;
+  margin: 10px;
+  font-size: 15px;
+  letter-spacing: 4px;
+}
+
+
+/*==================================================
+WEDDING FUNCTIONS
+==================================================*/
+
+.functions-section {
+  background: #fbf7f2;
+  padding: 90px 20px 30px;
+}
+
+.functions-small {
+  text-align: center;
+  letter-spacing: 8px;
+  font-size: 13px;
+  color: #6e2d31;
+  margin-bottom: 20px;
+}
+
+.functions-title {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 60px;
+  color: #6e2d31;
+  margin: 25px 0 70px;
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.function-card {
+  max-width: 700px;
+  margin: 0 auto 90px;
+  text-align: center;
+  /* Scroll-reveal starting state; toggled to visible via .show
+     (see .function-card.show, .family-card.show below) */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s cubic-bezier(.22, 1, .36, 1);
+
+}
+
+.function-card:last-child {
+  margin-bottom: 0;
+}
+
+.function-card h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 52px;
+  color: #6e2d31;
+  margin-bottom: 18px;
+  /* Shared floating animation with .family-card h3 — see ANIMATIONS */
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.function-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-style: italic;
+  color: #6e2d31;
+  font-weight: 700;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.function-info {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 1000;
+  letter-spacing: .5px;
+  color: #6e2d31;
+}
+
+.function-info span {
+  background: rgb(251, 232, 232);
+  padding: 12px 22px;
+  border-radius: 50px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+}
+
+.image-border {
+  background: rgba(255, 255, 255, .65);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 3px solid rgba(212, 175, 55, .30);
+  border-radius: 20px;
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, .10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.313);
+}
+
+
+.image-border img {
+  width: 100%;
+  border: 4px solid #ffffff62;
+  border-radius: 20px;
+  display: block;
+}
+
+.function-card img:hover {
+  transform: scale(1.02);
+}
+
+.function-card.show,
+.family-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+/*==================================================
+INVITATION SECTION
+==================================================*/
+
+.invitation-section {
+  background: #fbf7f2;
+  padding: 30px 20px 90px;
+}
+
+.invite-small {
+  text-align: center;
+  letter-spacing: 8px;
+  font-size: 13px;
+  color: #6e2d31;
+  margin-bottom: 20px;
+}
+
+.invite-title {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 60px;
+  color: #6e2d31;
+  margin: 25px 0 40px;
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.invite-message {
+  max-width: 760px;
+  margin: 0 auto 70px;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.8;
+  color: #6e2d31;
+}
+
+.family-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* .image-border is used inside the Wedding Functions photo cards; it shares
+   the "glass shine" sweep effect with .family-card, so the two are kept
+   grouped exactly as in the original stylesheet. */
+.family-card,
+.image-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.family-card {
+  width: 320px;
+  padding: 40px 30px;
+  text-align: center;
+  border-radius: 24px;
+  background:
+    linear-gradient(rgba(255, 255, 255, .65), rgba(255, 255, 255, .65)),
+    url("assests/embosspaper.jpg") center/cover no-repeat;
+  border: 1px solid rgba(212, 175, 55, .25);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, .08),
+    inset 0 1px 0 rgba(255, 255, 255, .55);
+  /* Scroll-reveal starting state; final transition value is defined by the
+     shared .function-card/.family-card rule near the bottom of this section,
+     which supersedes the .4s ease value that would otherwise apply here. */
+  transition: 1s cubic-bezier(.22, 1, .36, 1);
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.family-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 28px 55px rgba(0, 0, 0, .12),
+    0 0 25px rgba(212, 175, 55, .18);
+}
+
+.family-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 4px;
+  font-size: 18px;
+  color: #a68542;
+  margin-bottom: 15px;
+}
+
+.family-card h3 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  color: #6e2d31;
+  margin-bottom: 20px;
+  /* Shared floating animation with .function-card h2 — see ANIMATIONS */
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.family-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.family-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #6e2d31;
+  margin: 6px 0;
+}
+
+.family-divider {
+  font-size: 42px;
+  color: #b88b3d;
+}
+
+.family-card::before,
+.image-border::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -120%;
+  width: 45%;
+  height: 180%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, .35),
+      transparent);
+  transform: rotate(25deg);
+  animation: glassShine 6s linear infinite;
+  pointer-events: none;
+}
+
+
+/*==================================================
+VENUE SECTION
+==================================================*/
+
+/* Shared container styling for Venue, RSVP and Thank You — see also the
+   RSVP SECTION and THANK YOU SECTION markers below, which point back here
+   since the original CSS styles all three with one combined selector. */
+.venue-section,
+.rsvp-section,
+.thankyou-section {
+  background: #fbf7f2;
+  padding: 90px 20px 0px;
+}
+
+.venue-small {
+  letter-spacing: 8px;
+  font-size: 15px;
+  color: #6e2d31;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.venue-title,
+.thank-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 60px;
+  color: #6e2d31;
+  margin: 25px 0;
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.venue-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  color: #6e2d31;
+  margin-bottom: 15px;
+}
+
+.venue-address,
+.rsvp-text,
+.thank-text {
+  max-width: 650px;
+  margin: auto;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 900;
+  font-size: 78px;
+  line-height: 1.8;
+  color: #6e2d31;
+}
+
+.venue-btn {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 14px 38px;
+  border-radius: 50px;
+  background: #6e2d31;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  transition: .35s;
+
+}
+
+.venue-btn:hover {
+  background: #8d3940;
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-4px);
+}
+
+.venue-btn:focus,
+.venue-btn:focus-visible {
+  color: #ffffff;
+  text-decoration: none;
+  outline: none;
+}
+
+.couple-sign {
+  margin-top: 50px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 98px;
+  color: #6e2d31;
+  animation: floatName 4s ease-in-out infinite;
+}
+
+.venue-map {
+  margin-top: 15px;
+  padding: 1px;
+  background: rgba(255, 255, 255, .65);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(212, 175, 55, .30);
+  border-radius: 8px;
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, .10),
+    inset 0 1px 0 rgba(255, 255, 255, .65);
+  overflow: hidden;
+  position: relative;
+  transition: .45s ease;
+}
+
+.venue-map iframe {
+  width: 100%;
+  height: 420px;
+  border: 4px solid #ffffff;
+  border-radius: 20px;
+  display: block;
+}
+
+.venue-map:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, .14),
+    0 0 30px rgba(212, 175, 55, .18);
+}
+
+.venue-details {
+  margin-top: 30px;
+  gap: 18px;
+}
+
+.venue-info {
+  padding: 14px 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: #6e2d31;
+}
+
+
+/*==================================================
+RSVP SECTION
+==================================================*/
+
+/* .rsvp-section container, .venue-title (reused as the RSVP heading) and
+   .venue-btn are all styled together with Venue Section above — see the
+   shared selectors there. */
+
+
+/*==================================================
+THANK YOU SECTION
+==================================================*/
+
+/* .thankyou-section container, .thank-title and .thank-text are all styled
+   together with Venue Section above — see the shared selectors there. */
+
+
+/*==================================================
+ROSE PETALS
+==================================================*/
+
+.rose-petal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, opacity;
+  animation-name: rose-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+/*==================================================
+ANIMATIONS
+==================================================*/
+
+@keyframes shimmer {
+
+  0%,
+  100% {
+    opacity: .6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-slow {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes button-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heartbeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  55% {
+    transform: scale(1.05);
+  }
+
+  65% {
+    transform: scale(1.08);
+  }
+
+  85% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 180%;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes galleryMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-295px * 5));
+  }
+}
+
+@keyframes glassShine {
+  from {
+    left: -120%;
+  }
+
+  to {
+    left: 180%;
+  }
+}
+
+@keyframes floatName {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes rose-fall {
+  0% {
+    transform: translate3d(0, -15vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: var(--rose-op, 0.8);
+  }
+
+  50% {
+    transform: translate3d(var(--sway, 40px), 50vh, 0) rotate(180deg);
+  }
+
+  85% {
+    opacity: calc(var(--rose-op, 0.8) * 0.85);
+  }
+
+  100% {
+    transform: translate3d(var(--drift, 60px), 115vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media (max-width: 768px) {
+
+  /* --- Scratch Section --- */
+  .scratch-section {
+    padding: 30px 20px 0px;
+  }
+
+  .scratch-title-small {
+    font-size: 15px;
+    letter-spacing: 4px;
+  }
+
+  .divider span {
+    width: 40px;
+  }
+
+  .scratch-title {
+    font-size: 42px;
+    margin-bottom: 45px;
+  }
+
+  .scratch-card p {
+    margin-top: 14px;
+    font-size: 15px;
+    letter-spacing: 4px;
+  }
+
+  /* NOTE: mobile overrides for .scratch-wrapper, .scratch-card (width),
+     .heart (width/height) and .heart-value (font-size) are intentionally
+     omitted here. In the original stylesheet an unconditional rule further
+     down always overrode these on every viewport, so the mobile-only values
+     never actually rendered — see the SCRATCH SECTION comment above. */
+
+  /* --- Countdown Section --- */
+  .countdown-section {
+    padding: 0px 20px 50px;
+  }
+
+  .countdown-section h2 {
+    font-size: 18px;
+    letter-spacing: 4px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .date-text {
+    font-size: 38px;
+    margin: 18px 0 40px;
+  }
+
+  .countdown {
+    gap: 12px;
+  }
+
+  .countdown div {
+    width: 72px;
+    padding: 14px 5px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(60px) scale(.9);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .countdown span {
+    font-size: 24px;
+  }
+
+  .countdown small {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  /* --- Photo Gallery --- */
+  .gallery-section {
+    padding: 0px px 15px;
+  }
+
+  .gallery-small {
+    font-size: 15px;
+    letter-spacing: 4px;
+  }
+
+  .gallery-title {
+    font-size: 42px;
+    margin-bottom: 40px;
+  }
+
+  .gallery-card {
+    width: 250px;
+    height: 320px;
+    padding: 10px 10px 15px;
+  }
+
+  .gallery-card img {
+    height: 240px;
+  }
+
+  .gallery-track {
+    gap: 15px;
+  }
+
+  /* --- Wedding Functions --- */
+  .functions-section {
+    padding: 30px 10px 10px;
+  }
+
+  .functions-small {
+    font-size: 15px;
+    letter-spacing: 4px;
+  }
+
+  .functions-title {
+    font-size: 34px;
+    margin-bottom: 25px;
+  }
+
+  .function-card {
+    margin-bottom: 25px;
+  }
+
+  .function-card h2 {
+    font-size: 40px;
+  }
+
+  .function-quote {
+    font-size: 22px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .function-info {
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .function-info span {
+    font-size: 20px;
+    padding: 10px 16px;
+  }
+
+  .function-card img {
+    border-radius: 18px;
+  }
+
+  /* --- Invitation Section --- */
+  .invitation-section {
+    padding: 0px 0px;
+  }
+
+  .invite-small {
+    font-size: 15px;
+    letter-spacing: 4px;
+  }
+
+  .invite-title {
+    font-size: 42px;
+  }
+
+  .invite-message {
+    font-size: 20px;
+    margin-bottom: 45px;
+  }
+
+  .family-wrapper {
+    gap: 25px;
+  }
+
+  .family-card {
+    width: 100%;
+    max-width: 340px;
+    padding: 30px 22px;
+  }
+
+  .family-card h3 {
+    font-size: 42px;
+  }
+
+  .family-card h4 {
+    font-size: 20px;
+  }
+
+  .family-divider {
+    font-size: 34px;
+  }
+
+  /* --- Venue / RSVP / Thank You --- */
+  .venue-section {
+    padding: 70px 10px 40px;
+  }
+
+  .rsvp-section,
+  .thankyou-section {
+    padding: 20px 20px 10px;
+  }
+
+  .venue-title,
+  .thank-title {
+    font-size: 42px;
+  }
+
+  .venue-name {
+    font-size: 28px;
+  }
+
+  .venue-address,
+  .rsvp-text,
+  .thank-text {
+    font-size: 19px;
+  }
+
+  .venue-btn {
+    font-size: 17px;
+    padding: 12px 26px;
+  }
+
+  .couple-sign {
+    font-size: 42px;
+  }
+
+  .venue-map {
+    padding: 3px;
+    border-radius: 20px;
+  }
+
+  .venue-map iframe {
+    height: 260px;
+    border-radius: 16px;
+  }
+
+  /* NOTE: `font-size: 16px` is intentionally omitted from .venue-info here.
+     In the original stylesheet an unconditional .venue-info rule further
+     down always overrode it to 18px on every viewport, so 16px never
+     actually rendered. `width`/`text-align` are kept since nothing later
+     overrides them, so they remain live on mobile. */
+  .venue-info {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/*-------- music player ----------------- */
+
+#musicPlayer {
+  position: fixed;
+  bottom: 75px;
+  right: 25px;
+  width: 65px;
+  height: 65px;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.vinyl {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border-color: oklch(0.38 0.16 25);
+  background:
+    radial-gradient(circle, #ecc02f 0 10%, oklch(97.217% 0.03067 86.45), oklch(97.217% 0.03067 86.45 / 0.822), oklch(0.92 0.045 85), oklch(0.68 0.14 70));
+  box-shadow:
+    0 8px 35px  oklch(38.391% 0.15609 26.111 / 0.564),
+    0 0 15px rgba(250, 222, 132, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spin 6s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl-center {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: oklch(0.38 0.16 25);
+  ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+ /* =============== SHARE BUTTON =============== */
+    .share-btn {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 90;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 0;
+      border-radius: 9999px;
+      background: oklch(0.38 0.16 25);
+      color: #fdf2f8;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
+      transition: transform 0.15s ease;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .share-btn:active {
+      transform: scale(0.95);
+    }
+
+    .share-btn:disabled {
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    /* =============== ROSE PETALS =============== */
+    .rose-petals {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .rose-petal {
+      position: absolute;
+      top: 0;
+      will-change: transform, opacity;
+      animation-name: rose-fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes rose-fall {
+      0% {
+        transform: translate3d(0, -15vh, 0) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: var(--rose-op, 0.8);
+      }
+
+      50% {
+        transform: translate3d(var(--sway, 40px), 50vh, 0) rotate(180deg);
+      }
+
+      85% {
+        opacity: calc(var(--rose-op, 0.8) * 0.85);
+      }
+
+      100% {
+        transform: translate3d(var(--drift, 60px), 115vh, 0) rotate(360deg);
+        opacity: 0;
+      }
+    }
